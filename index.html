@@ -55,7 +55,24 @@
           return Matter.Bodies.polygon(x, y, 8, 30);
       });
 
-      Matter.World.add(engine.world, [stack, ground, ball, sling, mouseConstraint]);
+      let image = Matter.Bodies.circle(490, 200, 38, { //ボールを追加
+            density: 0.0005, // 密度: 単位面積あたりの質量
+            frictionAir: 0.06, // 空気抵抗(空気摩擦)
+            restitution: 0, // 弾力性
+            friction: 0.10, // 本体の摩擦
+            render: { //ボールのレンダリングの設定
+                sprite: { //スプライトの設定
+                    texture: './soccer_ball.png', //スプライトに使うテクスチャ画像を指定
+                    xScale: 0.2,
+                    yScale: 0.2,
+                }
+            },
+            timeScale: 1.5 //時間の倍率を設定(1で1倍速)
+        });
+
+
+
+      Matter.World.add(engine.world, [image, stack, ground, ball, sling, mouseConstraint]);
       Matter.Engine.run(engine);
       Matter.Render.run(render);
       
